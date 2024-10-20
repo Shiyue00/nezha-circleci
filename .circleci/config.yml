@@ -5,6 +5,7 @@ jobs:
       - image: circleci/python:3.7
     steps:
       - setup_remote_docker
+      - checkout
 
       - run:
           name: Set up environment variables  
