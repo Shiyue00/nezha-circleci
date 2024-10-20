@@ -11,7 +11,7 @@ jobs:
           name: Set up environment variables  
           command: |
             echo "export NEZHA_VER=0.19.8" >> $BASH_ENV
-            echo "export domain='tzz.shiyue.eu.org'" >> $BASH_ENV  
+            echo "export domain='tzz.shiyue.eu.org'" >> $BASH_ENV    
             echo "export port='5555'" >> $BASH_ENV  
             echo "export secret='vmhP6EKb9qe8gZY9CO'" >> $BASH_ENV  
 
@@ -24,6 +24,7 @@ jobs:
           name: Run Docker Image
           command: |
             docker run -d -p 8080:8080 nezha-agent:latest --restart always
+            background: true
 
 workflows:
   version: 2
