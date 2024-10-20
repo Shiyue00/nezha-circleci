@@ -1,0 +1,36 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.8  # CircleCI 上使用的基础镜像（可根据需要调整）
+
+    steps:
+      - checkout  # 检出你的代码到工作目录
+
+      - setup_remote_docker:
+          version: 20.10.7  # 设置 Docker 版本
+
+      - run:
+          name: Set up environment variables
+          command: |
+            echo "export NEZHA_VER=0.19.8" >> $BASH_ENV
+            echo "export domain='tzz.shiyue.eu.org'" >> $BASH_ENV  
+            echo "export port='5555'" >> $BASH_ENV  
+            echo "export secret='vmhP6EKb9qe8gZY9CO'" >> $BASH_ENV  
+
+      - run:
+          name: Build Docker Image
+          command: |
+            docker build -t nezha-agent:latest .
+
+      - run:
+          name: Run Docker Image
+          command: |
+            docker run -d -p 8080:8080 nezha-agent:latest
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
