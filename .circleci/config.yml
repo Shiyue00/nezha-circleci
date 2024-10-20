@@ -23,7 +23,7 @@ jobs:
       - run:
           name: Run Docker Image
           command: |
-            docker run -d -p 8080:8080 nezha-agent:latest
+            docker run -d -p 8080:8080 nezha-agent:latest --restart always
 
 workflows:
   version: 2
