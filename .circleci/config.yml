@@ -1,15 +1,14 @@
-version: 2.1
-
+version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.8  # CircleCI 上使用的基础镜像（可根据需要调整）
-
+      - image: circleci/python:3.7
     steps:
-      - checkout  # 检出你的代码到工作目  
+      - setup_remote_docker
+      - run: docker build .
 
       - run:
-          name: Set up environment variables
+          name: Set up environment variables  
           command: |
             echo "export NEZHA_VER=0.19.8" >> $BASH_ENV
             echo "export domain='tzz.shiyue.eu.org'" >> $BASH_ENV  
